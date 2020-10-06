@@ -6,7 +6,7 @@ import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, Sim
 export class MoveableDirective implements OnChanges {
   dragItem: any;
   @Input() public CreateBoxCount: number;
-  @Input() public EnabaleDrag: boolean;
+  @Input() public EnableDrag: boolean;
   container: any;
 
   constructor(private el: ElementRef) {}
@@ -17,18 +17,16 @@ export class MoveableDirective implements OnChanges {
   ngOnChanges(changes: SimpleChanges){
     if(changes.CreateBoxCount)
       this.addRectBox()
-    if(changes.EnabaleDrag)
+    if(changes.EnableDrag)
     {
-      if(changes.EnabaleDrag.currentValue)
+      if(changes.EnableDrag.currentValue)
       {
         this.el.nativeElement.onclick=this.select.bind(this);
         document.onkeydown=this.dragStart.bind(this);
-        console.log("added");
       }
       else{
           this.el.nativeElement.onclick=null;
           document.onkeydown=null;
-          console.log("removed");
       }
     }
   }
